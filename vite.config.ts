@@ -1,10 +1,21 @@
-import path from "path";
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import path, { join } from 'path';
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [
+    svelte(),
+    cssInjectedByJsPlugin(),
+    dts({
+      entryRoot: 'src',
+      tsConfigFilePath: join(__dirname, 'tsconfig.json'),
+      skipDiagnostics: false,
+      insertTypesEntry: true,
+    }),
+  ],
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
@@ -25,5 +36,5 @@ export default defineConfig({
         },
       },
     },
-  }
-})
+  },
+});
