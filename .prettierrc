@@ -1,0 +1,8 @@
+{
+  "printWidth": 120,
+  "singleQuote": true,
+  "svelteStrictMode": true,
+  "plugins": [
+    "prettier-plugin-svelte"
+  ]
+}
