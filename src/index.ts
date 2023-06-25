@@ -1,1 +1,1 @@
-export * from './lib/Counter.svelte';
+export * from './lib/demo-dialog';
