@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
+import { initialize } from '../index';
 import Button from './demo-dialog-button.svelte';
+
+initialize({
+  accessToken: 'token',
+});
 
 const meta = {
   title: 'Demoway/DemoDialog',

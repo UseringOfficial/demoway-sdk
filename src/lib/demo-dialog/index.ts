@@ -1,3 +1,4 @@
+import { getToken } from '../access-token';
 import DialogComponent from './demo-dialog.svelte';
 
 export interface IDemoDialog {
@@ -23,6 +24,7 @@ class DemoDialog implements IDemoDialog {
       target: document.body,
       props: {
         demoId,
+        accessToken: getToken(),
       },
     });
 

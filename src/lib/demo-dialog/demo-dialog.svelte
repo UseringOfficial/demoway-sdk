@@ -10,9 +10,10 @@
   }>();
 
   export let demoId: string = '';
+  export let accessToken: string = '';
 
   let src: string = '';
-  $: src = `${DOMAIN}/demo/${demoId}`;
+  $: src = `${DOMAIN}/demo/${demoId}?access_token=${accessToken}`;
 
   let width = 0;
   let height = 0;
