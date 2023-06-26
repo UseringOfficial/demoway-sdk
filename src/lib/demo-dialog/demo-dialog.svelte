@@ -12,8 +12,19 @@
   export let demoId: string = '';
   export let accessToken: string = '';
 
+  const params = new URLSearchParams();
+  params.set('browser', String(true));
+  params.set('scale', String(100));
+
+  let queryString = '';
+
+  $: {
+    params.set('access_token', accessToken);
+    queryString = params.toString();
+  }
+
   let src: string = '';
-  $: src = `${DOMAIN}/demo/${demoId}?access_token=${accessToken}`;
+  $: src = `${DOMAIN}/demo/${demoId}?${queryString}`;
 
   let width = 0;
   let height = 0;
@@ -28,10 +39,16 @@
   }
 </script>
 
-<div class="demo-dialog-overlay" on:click="{onClose}">
+<div class="demo-dialog-overlay" role="button" on:click="{onClose}">
   <div class="demo-dialog-container" use:resize="{onResize}">
-    <iframe class="demo-dialog-content" width="{width}" height="{height}" title="demo" src="{src}" allowfullscreen
-    ></iframe>
+    <iframe
+      class="demo-dialog-content"
+      width="{width}"
+      height="{height}"
+      title="demo"
+      src="{src}"
+      allowfullscreen
+      allowtransparency="true"></iframe>
     <button class="demo-dialog-close" on:click="{onClose}"></button>
   </div>
 </div>
@@ -47,7 +64,7 @@
       justify-content: center;
       top: 0;
       left: 0;
-      background-color: rgb(0, 0, 0, 0.5);
+      background-color: rgb(255, 255, 255, 0.7);
     }
 
     &-container {
