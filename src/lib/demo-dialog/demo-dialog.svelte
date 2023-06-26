@@ -1,6 +1,13 @@
+<svelte:options accessors />
+
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import { resize } from '../utils/resize';
   import { DOMAIN } from '../constants';
+
+  const eventDispatcher = createEventDispatcher<{
+    close: void;
+  }>();
 
   export let demoId: string = '';
 
@@ -14,12 +21,17 @@
     width = rect.width;
     height = rect.height;
   }
+
+  function onClose(): void {
+    eventDispatcher('close', undefined);
+  }
 </script>
 
-<div class="demo-dialog-overlay">
+<div class="demo-dialog-overlay" on:click="{onClose}">
   <div class="demo-dialog-container" use:resize="{onResize}">
-    <iframe width="{width}" height="{height}" src="{src}"></iframe>
-    <button class="demo-dialog-close"></button>
+    <iframe class="demo-dialog-content" width="{width}" height="{height}" title="demo" src="{src}" allowfullscreen
+    ></iframe>
+    <button class="demo-dialog-close" on:click="{onClose}"></button>
   </div>
 </div>
 
@@ -32,6 +44,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      top: 0;
+      left: 0;
+      background-color: rgb(0, 0, 0, 0.5);
     }
 
     &-container {
@@ -39,6 +54,10 @@
       height: 80%;
       overflow: visible;
       position: relative;
+    }
+
+    &-content {
+      border: none;
     }
 
     &-close {
@@ -49,8 +68,9 @@
       top: 0;
       right: 0;
       transform: translate(50%, -50%);
-      border-color: transparent;
+      border: none;
       cursor: pointer;
+      background-color: #333;
     }
   }
 </style>
