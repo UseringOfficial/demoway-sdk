@@ -1,8 +1,22 @@
 {
-  "name": "sdk",
-  "private": true,
-  "version": "0.0.0",
+  "name": "demoway-sdk",
+  "version": "0.0.2",
   "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/sdk.js",
+      "require": "./dist/sdk.umd.cjs",
+      "types": "./dist/sdk.d.ts"
+    }
+  },
+  "module": "./dist/sdk.js",
+  "main": "./dist/sdk.umd.cjs",
+  "types": "./dist/sdk.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
