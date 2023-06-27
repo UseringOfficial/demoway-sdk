@@ -49,7 +49,7 @@
       src="{src}"
       allowfullscreen
       allowtransparency="true"></iframe>
-    <button class="demo-dialog-close" on:click="{onClose}"></button>
+    <!--    <button class="demo-dialog-close" on:click="{onClose}"></button>-->
   </div>
 </div>
 
