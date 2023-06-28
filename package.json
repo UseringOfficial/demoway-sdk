@@ -23,7 +23,8 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.23",
