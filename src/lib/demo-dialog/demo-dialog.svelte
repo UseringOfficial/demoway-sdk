@@ -11,6 +11,7 @@
 
   export let demoId: string = '';
   export let accessToken: string = '';
+  export let zIndex: number;
 
   const params = new URLSearchParams();
   params.set('browser', String(true));
@@ -39,7 +40,7 @@
   }
 </script>
 
-<div class="demo-dialog-overlay" role="button" on:click="{onClose}">
+<div class="demo-dialog-overlay" role="button" on:click="{onClose}" style:z-index="{zIndex}">
   <div class="demo-dialog-container" use:resize="{onResize}">
     <iframe
       class="demo-dialog-content"

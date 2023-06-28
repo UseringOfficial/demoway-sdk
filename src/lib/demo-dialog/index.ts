@@ -1,6 +1,10 @@
 import { getToken } from '../access-token';
 import DialogComponent from './demo-dialog.svelte';
 
+export interface IDemoDialogOptions {
+  zIndex?: number;
+}
+
 export interface IDemoDialog {
   demoId: string;
   close(): void;
@@ -19,12 +23,13 @@ class DemoDialog implements IDemoDialog {
     });
   }
 
-  constructor(demoId: string) {
+  constructor(demoId: string, { zIndex = 10100 }: IDemoDialogOptions) {
     this.component = new DialogComponent({
       target: document.body,
       props: {
         demoId,
         accessToken: getToken(),
+        zIndex,
       },
     });
 
@@ -38,6 +43,6 @@ class DemoDialog implements IDemoDialog {
   }
 }
 
-export function openDemoDialog(demoId: string): IDemoDialog {
-  return new DemoDialog(demoId);
+export function openDemoDialog(demoId: string, options: IDemoDialogOptions = {}): IDemoDialog {
+  return new DemoDialog(demoId, options);
 }
