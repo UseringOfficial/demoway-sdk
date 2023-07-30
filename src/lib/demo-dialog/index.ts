@@ -1,45 +1,45 @@
 import { getToken } from '../access-token';
-import DialogComponent from './demo-dialog.svelte';
+import './demo-dialog.svelte';
 
 export interface IDemoDialogOptions {
   zIndex?: number;
 }
 
 export interface IDemoDialog {
-  demoId: string;
+  demoId: string | null;
   close(): void;
 }
 
 class DemoDialog implements IDemoDialog {
-  private component: DialogComponent;
+  private component: HTMLElement;
 
-  public get demoId(): string {
-    return this.component.demoId;
+  public get demoId(): string | null {
+    return this.component.getAttribute('demo-id');
   }
 
-  public set demoId(value: string) {
-    this.component.$set({
-      demoId: value,
-    });
+  public set demoId(value: string | null) {
+    if (!value) {
+      return;
+    }
+    this.component.setAttribute('demo-id', value);
   }
 
   constructor(demoId: string, { zIndex = 10100 }: IDemoDialogOptions) {
-    this.component = new DialogComponent({
-      target: document.body,
-      props: {
-        demoId,
-        accessToken: getToken(),
-        zIndex,
-      },
-    });
-
-    this.component.$on('close', () => {
+    const el = document.createElement('demoway-demo-dialog');
+    this.component = el;
+    el.setAttribute('demo-id', demoId);
+    el.style.zIndex = String(zIndex);
+    el.addEventListener('close', () => {
       this.close();
     });
+
+    document.body.appendChild(el);
   }
 
   public close(): void {
-    this.component?.$destroy();
+    if (this.component) {
+      document.body.removeChild(this.component);
+    }
   }
 }
 

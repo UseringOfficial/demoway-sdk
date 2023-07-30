@@ -1,17 +1,18 @@
-<svelte:options accessors />
+<svelte:options customElement="demoway-demo-dialog" />
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { getToken } from '../access-token';
   import { resize } from '../utils/resize';
-  import { DOMAIN } from '../constants';
+  import { DOMAIN_MAIN } from '../constants';
 
   const eventDispatcher = createEventDispatcher<{
     close: void;
   }>();
 
   export let demoId: string = '';
-  export let accessToken: string = '';
-  export let zIndex: number;
+
+  const accessToken = getToken();
 
   const params = new URLSearchParams();
   params.set('browser', String(true));
@@ -25,7 +26,7 @@
   }
 
   let src: string = '';
-  $: src = `${DOMAIN}/demo/${demoId}?${queryString}`;
+  $: src = `${DOMAIN_MAIN}/demo/${demoId}?${queryString}`;
 
   let width = 0;
   let height = 0;
@@ -40,7 +41,7 @@
   }
 </script>
 
-<div class="demo-dialog-overlay" role="button" on:click="{onClose}" style:z-index="{zIndex}">
+<div class="demo-dialog-overlay" role="button" on:click="{onClose}">
   <div class="demo-dialog-container" use:resize="{onResize}">
     <iframe
       class="demo-dialog-content"
@@ -79,17 +80,17 @@
       border: none;
     }
 
-    &-close {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      top: 0;
-      right: 0;
-      transform: translate(50%, -50%);
-      border: none;
-      cursor: pointer;
-      background-color: #333;
-    }
+    //&-close {
+    //  position: absolute;
+    //  width: 30px;
+    //  height: 30px;
+    //  border-radius: 50%;
+    //  top: 0;
+    //  right: 0;
+    //  transform: translate(50%, -50%);
+    //  border: none;
+    //  cursor: pointer;
+    //  background-color: #333;
+    //}
   }
 </style>
