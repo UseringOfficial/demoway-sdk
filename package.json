@@ -1,6 +1,6 @@
 {
   "name": "demoway-sdk",
-  "version": "0.1.1",
+  "version": "0.2.0-beta.3",
   "type": "module",
   "files": [
     "dist",
@@ -37,6 +37,7 @@
     "@sveltejs/vite-plugin-svelte": "^2.4.3",
     "@tsconfig/svelte": "^4.0.1",
     "@types/node": "^18.17.1",
+    "auto-bind": "^5.0.1",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "react": "^18.2.0",
@@ -50,6 +51,6 @@
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-css-injected-by-js": "^3.2.1",
-    "vite-plugin-dts": "^3.0.0"
+    "vite-plugin-dts": "^3.4.0"
   }
 }
