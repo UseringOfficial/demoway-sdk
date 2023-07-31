@@ -13,9 +13,7 @@ export default defineConfig({
     }),
     dts({
       entryRoot: 'src',
-      tsConfigFilePath: join(__dirname, 'tsconfig.json'),
-      skipDiagnostics: false,
-      insertTypesEntry: true,
+      tsconfigPath: join(__dirname, 'tsconfig.json'),
     }),
   ],
   build: {
