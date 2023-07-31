@@ -11,12 +11,12 @@
     ".": {
       "import": "./dist/sdk.js",
       "require": "./dist/sdk.umd.cjs",
-      "types": "./dist/sdk.d.ts"
+      "types": "./dist/index.d.ts"
     }
   },
   "module": "./dist/sdk.js",
   "main": "./dist/sdk.umd.cjs",
-  "types": "./dist/sdk.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "vite build",
