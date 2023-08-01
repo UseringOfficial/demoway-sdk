@@ -1,5 +1,6 @@
-import { ServiceHost } from './lib/service-host';
+import { bufferCount, filter, firstValueFrom, fromEvent, map, noop } from 'rxjs';
 import type { ISDKService } from './lib/service-host';
+import { ServiceHost } from './lib/service-host';
 
 export * from './lib/demo-dialog';
 export type { ISDKService };
@@ -39,4 +40,15 @@ export function initialize({ accessToken }: ISDKInitializeOptions): Promise<ISDK
   serviceHost.delegate = promise;
 
   return promise.then(() => serviceHost);
+}
+
+export function rageClick(element: HTMLElement, count: number, timeLimit: number): Promise<void> {
+  return firstValueFrom(
+    fromEvent(element, 'click').pipe(
+      map(() => Date.now()),
+      bufferCount(count),
+      filter((list) => list[list.length - 1] - list[0] < timeLimit),
+      map(noop)
+    )
+  );
 }
