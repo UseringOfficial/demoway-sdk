@@ -1,19 +1,19 @@
 import path, { join } from 'path';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    svelte(),
-    cssInjectedByJsPlugin(),
+    svelte({
+      compilerOptions: {
+        customElement: true,
+      },
+    }),
     dts({
       entryRoot: 'src',
-      tsConfigFilePath: join(__dirname, 'tsconfig.json'),
-      skipDiagnostics: false,
-      insertTypesEntry: true,
+      tsconfigPath: join(__dirname, 'tsconfig.json'),
     }),
   ],
   build: {
