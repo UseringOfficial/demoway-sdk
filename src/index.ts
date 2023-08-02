@@ -14,7 +14,8 @@ function readLocalStorage(key: string): string | null {
 }
 
 const SERVICE_ENDPOINT_KEY = 'MIAOLU_SERVICE_ENDPOINT';
-export const SERVICE_ENDPOINT = readLocalStorage(SERVICE_ENDPOINT_KEY) || `//s.demoway.co/sdk/sdk-service/index.js`;
+export const SERVICE_ENDPOINT =
+  readLocalStorage(SERVICE_ENDPOINT_KEY) || `https://s.demoway.co/sdk/sdk-service/index.js`;
 
 function errorNotInitialized(): never {
   throw new Error('sdk is not initialized');
