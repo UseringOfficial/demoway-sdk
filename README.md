@@ -24,7 +24,7 @@ yarn add demoway-sdk
 
 在应用入口调用 initialize 方法
 
-### Vue
+### Vue 示例
 
 ```js
 import { intialize } from 'demoway-sdk';
@@ -37,7 +37,7 @@ initialzie({
 createApp(App).mount();
 ```
 
-### React
+### React 示例
 
 ```jsx
 import { intialize } from 'demoway-sdk';
@@ -74,6 +74,8 @@ enableRecord();
 
 ```js
 import { enableRecord, rageClick } from 'demoway-sdk';
+
+const button = document.querySelector('button');
 
 // 用户在1秒内点击按钮5次
 rageClick(button, 5, 1000).then(() => {
