@@ -61,6 +61,10 @@ root.render(<App />);
 
 ### Open Demo in Dialog
 
+<img src="./assets/demo-dialog.png" width="100%" />
+
+Open a demo in dialog, which can switch to full screen mode.
+
 ```js
 import { openDemoDialog } from 'demoway-sdk';
 
@@ -68,6 +72,8 @@ openDemoDialog('demo-id'); // demo-id is getting from DemoWay dashboard
 ```
 
 ### Record a New Demo
+
+<img src="./assets/recording-board.png" width="60%" />
 
 Enable recording feature and show recording board by calling `enableRecord` function.
 
