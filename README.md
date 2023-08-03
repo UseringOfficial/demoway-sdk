@@ -1,6 +1,6 @@
 # Demoway SDK
 
-## 安装
+## Install
 
 ### pnpm
 
@@ -20,65 +20,74 @@ npm install demoway-sdk --save
 yarn add demoway-sdk
 ```
 
-## 初始化
+## Initialize DemoWay SDK
 
-在应用入口调用 initialize 方法
+Initialize DemoWay SDK before application rendering
 
-### Vue 示例
+### Vue Example
 
 ```js
-import { intialize } from 'demoway-sdk';
+import { initialize } from 'demoway-sdk';
 import { createApp } from 'vue';
 
-initialzie({
-  accessToken: '', // 从管理后台获取
-});
-
+initialize({
+  accessToken: '', // getting from DemoWay dashboard
+})
+/**
+* render your app
+*/
 createApp(App).mount();
 ```
 
-### React 示例
+### React Example
 
 ```jsx
-import { intialize } from 'demoway-sdk';
+import { initialize } from 'demoway-sdk';
 import { createRoot } from 'react-dom/client';
 
-initialzie({
-  accessToken: '', // 从管理后台获取
+initialize({
+  accessToken: '', // getting from DemoWay dashboard
 });
 
+/**
+* render your app
+*/
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 root.render(<App />);
 ```
 
-## 使用
+## Usage
 
-### 打开 demo 对话框
+### Open Demo in Dialog
 
 ```js
 import { openDemoDialog } from 'demoway-sdk';
 
-openDemoDialog('demo-id');
+openDemoDialog('demo-id'); // demo-id is getting from DemoWay dashboard
 ```
 
-### 启动录制功能
+### Record a New Demo
+
+Enable recording feature and show recording board by calling `enableRecord` function.
 
 ```js
 import { enableRecord } from 'demoway-sdk';
 
+// enable recording feature and show recording board
 enableRecord();
 ```
 
-### 工具函数 rageClick
+Enable recording feature and show recording board by rage click.
 
 ```js
 import { enableRecord, rageClick } from 'demoway-sdk';
 
 const button = document.querySelector('button');
 
-// 用户在1秒内点击按钮5次
+// rage click button 5 times with 1000ms interval
 rageClick(button, 5, 1000).then(() => {
+  // enable recording feature and show recording board
   return enableRecord();
 });
 ```
