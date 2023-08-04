@@ -7,6 +7,7 @@ export type { ISDKService };
 
 export interface ISDKInitializeOptions {
   accessToken: string;
+  zIndex: number;
 }
 
 function readLocalStorage(key: string): string | null {
@@ -21,23 +22,26 @@ function errorNotInitialized(): never {
   throw new Error('sdk is not initialized');
 }
 
-const serviceHost = new ServiceHost(
-  Promise.resolve<ISDKService>({
-    openDemoDialog: errorNotInitialized,
-    enableRecord: errorNotInitialized,
-  })
-);
+const dummySDKService: Promise<ISDKService> = Promise.resolve({
+  openDemoDialog: errorNotInitialized,
+  enableRecord: errorNotInitialized,
+});
+
+const serviceHost = new ServiceHost(dummySDKService);
 
 export const openDemoDialog = serviceHost.openDemoDialog;
 export const enableRecord = serviceHost.enableRecord;
 
-export function initialize({ accessToken }: ISDKInitializeOptions): Promise<ISDKService> {
-  if (!accessToken) {
+export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
+  if (!options.accessToken) {
     throw new Error('Invalid token');
   }
 
-  const url = SERVICE_ENDPOINT.startsWith('http') ? SERVICE_ENDPOINT : `${location.protocol}${SERVICE_ENDPOINT}`;
-  const promise = import(new URL(url).toString()).then((module) => module.initialize(accessToken));
+  if (serviceHost.delegate !== dummySDKService) {
+    return serviceHost.delegate.then(() => serviceHost);
+  }
+
+  const promise = import(SERVICE_ENDPOINT).then((module) => module.initialize(options));
   serviceHost.delegate = promise;
 
   return promise.then(() => serviceHost);
