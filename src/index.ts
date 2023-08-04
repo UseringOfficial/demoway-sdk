@@ -7,7 +7,7 @@ export type { ISDKService };
 
 export interface ISDKInitializeOptions {
   accessToken: string;
-  zIndex: number;
+  zIndex?: number;
 }
 
 function readLocalStorage(key: string): string | null {
