@@ -27,17 +27,19 @@
     "@sveltejs/vite-plugin-svelte": "^2.4.3",
     "@tsconfig/svelte": "^4.0.1",
     "@types/node": "^18.17.1",
-    "auto-bind": "^5.0.1",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
-    "rxjs": "^7.8.1",
     "sass": "^1.64.1",
-    "svelte": "^4.1.1",
     "svelte-check": "^3.4.6",
-    "tslib": "^2.6.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-css-injected-by-js": "^3.2.1",
     "vite-plugin-dts": "^3.4.0"
+  },
+  "dependencies": {
+    "auto-bind": "^5.0.1",
+    "rxjs": "^7.8.1",
+    "svelte": "^4.1.1",
+    "tslib": "^2.6.1"
   }
 }

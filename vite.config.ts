@@ -27,7 +27,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue'],
+      external: ['auto-bind', 'rxjs', 'svelte', 'tslib'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
