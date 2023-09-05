@@ -15,6 +15,16 @@ export default defineConfig({
       entryRoot: 'src',
       tsconfigPath: join(__dirname, 'tsconfig.json'),
     }),
+
+    {
+      name: 'webpack-ignore',
+      renderDynamicImport() {
+        return {
+          left: 'import(/*webpackIgnore: true*/',
+          right: ')',
+        };
+      },
+    },
   ],
   build: {
     lib: {
