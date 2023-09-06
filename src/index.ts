@@ -5,6 +5,9 @@ import { ServiceHost } from './lib/service-host';
 export * from './lib/demo-dialog';
 export type { ISDKService };
 
+const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
+const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
+
 export interface ISDKInitializeOptions {
   accessToken: string;
   zIndex?: number;
@@ -32,6 +35,10 @@ const serviceHost = new ServiceHost(dummySDKService);
 export const openDemoDialog = serviceHost.openDemoDialog;
 export const enableRecord = serviceHost.enableRecord;
 
+if (typeof sessionStorage === 'object') {
+  sessionStorage.setItem(SESSION_STORAGE_KEY, 'false');
+}
+
 export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
   if (!options.accessToken) {
     throw new Error('Invalid token');
@@ -41,7 +48,15 @@ export function initialize(options: ISDKInitializeOptions): Promise<ISDKService>
     return serviceHost.delegate.then(() => serviceHost);
   }
 
-  const promise = import(SERVICE_ENDPOINT).then((module) => module.initialize(options));
+  if (sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true') {
+    throw new Error('Multiple sdk detected');
+  }
+
+  const promise = import(SERVICE_ENDPOINT).then((module) => {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+    window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
+    return module.initialize(options);
+  });
   serviceHost.delegate = promise;
 
   return promise.then(() => serviceHost);
