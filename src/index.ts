@@ -9,6 +9,7 @@ const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
 const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
 
 export interface ISDKInitializeOptions {
+  appId: string;
   accessToken: string;
   zIndex?: number;
 }
@@ -42,6 +43,10 @@ if (typeof sessionStorage === 'object') {
 export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
   if (!options.accessToken) {
     throw new Error('Invalid token');
+  }
+
+  if (!options.appId) {
+    throw new Error('Missing appId');
   }
 
   if (serviceHost.delegate !== dummySDKService) {
