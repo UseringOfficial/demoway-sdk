@@ -57,11 +57,16 @@ export function initialize(options: ISDKInitializeOptions): Promise<ISDKService>
     throw new Error('Multiple sdk detected');
   }
 
-  const promise = import(SERVICE_ENDPOINT).then((module) => {
-    sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
-    window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
-    return module.initialize(options);
-  });
+  const promise = import(SERVICE_ENDPOINT)
+    .then((module) => {
+      sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+
+      return module.initialize(options);
+    })
+    .then((service) => {
+      window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
+      return service;
+    });
   serviceHost.delegate = promise;
 
   return promise.then(() => serviceHost);
