@@ -68,7 +68,17 @@ Open a demo in dialog, which can switch to full screen mode.
 ```js
 import { openDemoDialog } from 'demoway-sdk';
 
-openDemoDialog('demo-id'); // demo-id is getting from DemoWay dashboard
+openDemoDialog('demo-id'); // demo-id can be got from DemoWay dashboard
+```
+
+### Open CheckList in Dialog
+
+Open a checklist in dialog, which can switch to full screen mode.
+
+```js
+import { openDemoDialog } from 'demoway-sdk';
+
+openDemoDialog('demo-id', {checklistId: 'checklist-id'}); // demo-id and checklist-id can be got from DemoWay dashboard
 ```
 
 ### Record a New Demo
