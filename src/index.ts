@@ -8,10 +8,17 @@ export type { ISDKService };
 const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
 const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
 
+export interface ISDKAttributes {
+  userId: string;
+  username: string;
+  [key: string]: unknown;
+}
+
 export interface ISDKInitializeOptions {
   appId: string;
   accessToken: string;
   zIndex?: number;
+  attributes?: ISDKAttributes;
 }
 
 function readLocalStorage(key: string): string | null {
