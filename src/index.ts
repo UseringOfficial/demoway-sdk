@@ -9,8 +9,8 @@ const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
 const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
 
 export interface ISDKAttributes {
-  userId: string;
-  username: string;
+  userId?: string;
+  username?: string;
   [key: string]: unknown;
 }
 
