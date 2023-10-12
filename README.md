@@ -32,6 +32,7 @@ import { createApp } from 'vue';
 
 initialize({
   accessToken: '', // getting from DemoWay dashboard
+  appId: '' //  getting from DemoWay dashboard
 })
 /**
 * render your app
@@ -47,6 +48,7 @@ import { createRoot } from 'react-dom/client';
 
 initialize({
   accessToken: '', // getting from DemoWay dashboard
+  appId: '' //  getting from DemoWay dashboard
 });
 
 /**
