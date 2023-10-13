@@ -31,8 +31,16 @@ import { initialize } from 'demoway-sdk';
 import { createApp } from 'vue';
 
 initialize({
-  accessToken: '', // getting from DemoWay dashboard
-  appId: '' //  getting from DemoWay dashboard
+  accessToken: '', // getting from your DemoWay dashboard
+  appId: '' //  getting from your DemoWay dashboard
+  attributes: {
+    userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
+    userName: '',
+    nickName: '', // the nick name of the user in your system, will display in your DemoWay dashboard
+    anyOtherAttributes1: '' // any other attributes you want to provide, will display in your DemoWay dashboard
+    anyOtherAttributes2: '' 
+    anyOtherAttributes2: '' 
+  },
 })
 /**
 * render your app
@@ -49,6 +57,14 @@ import { createRoot } from 'react-dom/client';
 initialize({
   accessToken: '', // getting from DemoWay dashboard
   appId: '' //  getting from DemoWay dashboard
+  attributes: {
+    userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
+    userName: '',
+    nickName: '', // the nick name of the user in your system, will display in your DemoWay dashboard
+    anyOtherAttributes1: '' // any other attributes you want to provide, will display in your DemoWay dashboard
+    anyOtherAttributes2: '' 
+    anyOtherAttributes2: '' 
+  },
 });
 
 /**
