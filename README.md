@@ -32,7 +32,7 @@ import { createApp } from 'vue';
 
 initialize({
   accessToken: '', // getting from your DemoWay dashboard
-  appId: '' //  getting from your DemoWay dashboard
+  appId: '', //  getting from your DemoWay dashboard
   attributes: {
     userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
     userName: '',
@@ -56,7 +56,7 @@ import { createRoot } from 'react-dom/client';
 
 initialize({
   accessToken: '', // getting from DemoWay dashboard
-  appId: '' //  getting from DemoWay dashboard
+  appId: '', //  getting from DemoWay dashboard
   attributes: {
     userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
     userName: '',
