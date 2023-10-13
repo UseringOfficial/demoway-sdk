@@ -37,9 +37,9 @@ initialize({
     userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
     userName: '',
     nickName: '', // the nick name of the user in your system, will display in your DemoWay dashboard
-    anyOtherAttributes1: '' // any other attributes you want to provide, will display in your DemoWay dashboard
-    anyOtherAttributes2: '' 
-    anyOtherAttributes2: '' 
+    anyOtherAttributes1: '', // any other attributes you want to provide, will display in your DemoWay dashboard
+    anyOtherAttributes2: '', 
+    anyOtherAttributes3: '', 
   },
 })
 /**
@@ -61,9 +61,9 @@ initialize({
     userId: '', // the user id or openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
     userName: '',
     nickName: '', // the nick name of the user in your system, will display in your DemoWay dashboard
-    anyOtherAttributes1: '' // any other attributes you want to provide, will display in your DemoWay dashboard
-    anyOtherAttributes2: '' 
-    anyOtherAttributes2: '' 
+    anyOtherAttributes1: '', // any other attributes you want to provide, will display in your DemoWay dashboard
+    anyOtherAttributes2: '', 
+    anyOtherAttributes3: '', 
   },
 });
 
