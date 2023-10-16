@@ -37,19 +37,18 @@ initialize({
     openId: '',
     userName: '',
     nickName: ''
-  } as IUserInfo,
+    xxx: '',
+    company: { 
+      id: ''  
+      name: '' 
+    }
+  } as IUserInfo, // IUserInfo is TS interface, you can remove it if you are not using TS
 })
 /**
 * render your app
 */
 createApp(App).mount();
 ```
-
-`accessToken`: temporary access token, you can get it from your DemoWay dashboard   
-`appId`: your DemoWay application id, you can get it from your DemoWay dashboard   
-`userInfo.openId`: openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId   
-`userInfo.nickName`: the nick name of the user in your system, will display in your DemoWay dashboard   
-`userInfo.xxx`: you can provide any other attributes you want into `userInfo`, they will all display as a part of visit user profile in your DemoWay dashboard   
 
 ### React Example
 
@@ -64,8 +63,13 @@ initialize({
     openId: '',
     userName: '',
     nickName: ''
-  } as IUserInfo,
-});
+    xxx: '',
+    company: { 
+      id: ''  
+      name: '' 
+    }
+  } as IUserInfo, // IUserInfo is TS interface, you can remove it if you are not using TS
+})
 
 /**
 * render your app
@@ -74,6 +78,20 @@ const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 root.render(<App />);
 ```
+
+| Name          | Required |    Description         |
+| --------      | ------- |    ---------|
+| accessToken   | required    |   temporary access token fot test, you can get it from your DemoWay dashboard |
+| appId      | required     | your DemoWay application id, you can get it from your DemoWay dashboard  |
+| userInfo         | optional   | **strongly recommend**  |
+| userInfo.openId   | optional   |  open user id of the user in your system, you can associate each user with the users in your own system when retrieving user access records through the API. **strongly recommend**  |
+| userInfo.nickName   | optional   |  the nick name of the user in your system |
+| userInfo.xxx   | optional   |   you can add string value with any key name to "userInfo" |
+| userInfo.company   | optional   |   **strongly recommend** |
+| userInfo.company.id   | optional   |   the company id of the user in your system |
+| userInfo.company.name   | required   |   the company or organization name of the user, required in `userInfo.company`|
+
+When a user accesses the demo, Demoway will create an anonymous user for them. If you provide the "userInfo" field when initializing the SDK, this information will be associated with the anonymous user. In the Demoway dashboard, when viewing the user's access records, you may also see this information. This makes it convenient to identify different users. If the "userInfo" includes the "openId" field, you can associate each user with the users in your own system when retrieving access records through the API. 
 
 ## Usage
 
