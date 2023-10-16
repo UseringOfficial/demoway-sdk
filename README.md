@@ -45,11 +45,11 @@ initialize({
 createApp(App).mount();
 ```
 
-`accessToken`: temporary access token, you can get it from your DemoWay dashboard
-`appId`: your DemoWay application id, you can get it from your DemoWay dashboard
-`userInfo.openId`: openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId
-`userInfo.nickName`: the nick name of the user in your system, will display in your DemoWay dashboard
-`userInfo.xxx`: you can provide any other attributes you want into `userInfo`, they will all display as a part of visit user profile in your DemoWay dashboard
+`accessToken`: temporary access token, you can get it from your DemoWay dashboard   
+`appId`: your DemoWay application id, you can get it from your DemoWay dashboard   
+`userInfo.openId`: openid of the user in your system, you can get the user‘s data from DemoWay by API via this userId   
+`userInfo.nickName`: the nick name of the user in your system, will display in your DemoWay dashboard   
+`userInfo.xxx`: you can provide any other attributes you want into `userInfo`, they will all display as a part of visit user profile in your DemoWay dashboard   
 
 ### React Example
 
