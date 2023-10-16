@@ -9,8 +9,19 @@ const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
 const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
 
 export interface ISDKAttributes {
-  userId?: string;
-  username?: string;
+  userInfo?: IUserInfo;
+  [key: string]: unknown;
+}
+
+export interface IUserInfo {
+  openId?: string;
+  userName?: string;
+  nickName?: string;
+  email?:string;
+  company?: {
+    id?: string;
+    name: string;
+  };
   [key: string]: unknown;
 }
 
@@ -18,7 +29,7 @@ export interface ISDKInitializeOptions {
   appId: string;
   accessToken: string;
   zIndex?: number;
-  attributes?: ISDKAttributes;
+  userInfo?: IUserInfo;
 }
 
 function readLocalStorage(key: string): string | null {
@@ -67,8 +78,9 @@ export function initialize(options: ISDKInitializeOptions): Promise<ISDKService>
   const promise = import(SERVICE_ENDPOINT)
     .then((module) => {
       sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+      const {userInfo, ...otherOptions} = options;
 
-      return module.initialize(options);
+      return module.initialize({...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes});
     })
     .then((service) => {
       window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
