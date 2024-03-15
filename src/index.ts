@@ -10,6 +10,7 @@ const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
 
 export interface ISDKAttributes {
   userInfo?: IUserInfo;
+
   [key: string]: unknown;
 }
 
@@ -17,11 +18,12 @@ export interface IUserInfo {
   openId?: string;
   userName?: string;
   nickName?: string;
-  email?:string;
+  email?: string;
   company?: {
     id?: string;
     name: string;
   };
+
   [key: string]: unknown;
 }
 
@@ -30,15 +32,8 @@ export interface ISDKInitializeOptions {
   accessToken: string;
   zIndex?: number;
   userInfo?: IUserInfo;
+  endpoint?: string;
 }
-
-function readLocalStorage(key: string): string | null {
-  return typeof localStorage === 'object' ? localStorage.getItem(key) : null;
-}
-
-const SERVICE_ENDPOINT_KEY = 'MIAOLU_SERVICE_ENDPOINT';
-export const SERVICE_ENDPOINT =
-  readLocalStorage(SERVICE_ENDPOINT_KEY) || `https://s.demoway.co/sdk/sdk-service/index.js`;
 
 function errorNotInitialized(): never {
   throw new Error('sdk is not initialized');
@@ -75,12 +70,12 @@ export function initialize(options: ISDKInitializeOptions): Promise<ISDKService>
     throw new Error('Multiple sdk detected');
   }
 
-  const promise = import(SERVICE_ENDPOINT)
+  const promise = import(options.endpoint ?? 'https://s.demoway.co/sdk/sdk-service/index.js')
     .then((module) => {
       sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
-      const {userInfo, ...otherOptions} = options;
+      const { userInfo, ...otherOptions } = options;
 
-      return module.initialize({...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes});
+      return module.initialize({ ...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes });
     })
     .then((service) => {
       window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
