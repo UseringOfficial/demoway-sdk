@@ -33,6 +33,8 @@ export interface ISDKInitializeOptions {
   zIndex?: number;
   userInfo?: IUserInfo;
   endpoint?: string;
+  region?: string;
+  locale?: string;
 }
 
 function errorNotInitialized(): never {
