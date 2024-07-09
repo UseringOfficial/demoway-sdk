@@ -1,6 +1,6 @@
+import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path, { join } from 'path';
 import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
@@ -10,6 +10,7 @@ export default defineConfig({
       compilerOptions: {
         customElement: true,
       },
+      preprocess: vitePreprocess(),
     }),
     dts({
       entryRoot: 'src',
