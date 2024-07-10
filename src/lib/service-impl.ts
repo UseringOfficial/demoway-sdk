@@ -46,7 +46,8 @@ export class ServiceImpl implements ISDKService {
   }
 
   private loadRecorder(): Promise<IRecorderService> {
-    return import(this.options.endpoint ?? 'https://s.dwimg.top/sdk/sdk-service/index.js').then((module) => {
+    const endpoint = this.options.endpoint || 'https://s.dwimg.top/sdk/v1/index.js';
+    return import(/* @vite-ignore */ endpoint).then((module) => {
       const { userInfo, ...otherOptions } = this.options;
 
       return module.initialize({ ...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes });

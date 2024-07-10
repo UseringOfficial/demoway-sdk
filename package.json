@@ -18,16 +18,19 @@
   "main": "./dist/sdk.umd.cjs",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "histoire dev",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "prepublishOnly": "npm run check && npm run build"
   },
   "devDependencies": {
+    "@histoire/plugin-svelte": "^0.17.17",
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "@tsconfig/svelte": "^5.0.4",
     "@types/node": "^20.14.10",
     "auto-bind": "^5.0.1",
+    "histoire": "^0.17.17",
     "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.5",
     "sass": "^1.77.7",

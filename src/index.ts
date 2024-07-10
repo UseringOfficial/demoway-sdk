@@ -4,7 +4,7 @@ import { ServiceHost } from './lib/service-host';
 import { ServiceImpl } from './lib/service-impl';
 import type { ISDKInitializeOptions } from './lib/types';
 
-export * from './lib/demo-dialog';
+export * from './lib/types';
 export type { ISDKService };
 
 function errorNotInitialized(): never {
@@ -39,7 +39,7 @@ export function rageClick(element: HTMLElement, count: number, timeLimit: number
       map(() => Date.now()),
       bufferCount(count),
       filter((list) => list[list.length - 1] - list[0] < timeLimit),
-      map(noop)
-    )
+      map(noop),
+    ),
   );
 }
