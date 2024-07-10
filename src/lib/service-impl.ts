@@ -1,15 +1,8 @@
-import { filter, firstValueFrom, fromEvent, Observable } from 'rxjs';
+import { filter, firstValueFrom, fromEvent, type Observable } from 'rxjs';
 import { DEMOWAY_DEMO_DIALOG_LOAD } from './constants';
 import { DemoDialogController } from './demo-dialog';
-import type {
-  DemoDialogElement,
-  IDemoDialog,
-  IDemoDialogOptions,
-  IRecorderService,
-  ISDKAttributes,
-  ISDKInitializeOptions,
-} from './types';
 import type { ISDKService } from './service-host';
+import type { IDemoDialog, IDemoDialogOptions, IRecorderService, ISDKAttributes, ISDKInitializeOptions } from './types';
 import { normalizeOrigin } from './utils';
 
 export class ServiceImpl implements ISDKService {
@@ -23,7 +16,7 @@ export class ServiceImpl implements ISDKService {
     this.options = options;
 
     this.demoLoad$ = fromEvent<MessageEvent>(window, 'message').pipe(
-      filter((e) => e.origin === normalizeOrigin(options) && e.data?.type === DEMOWAY_DEMO_DIALOG_LOAD)
+      filter((e) => e.origin === normalizeOrigin(options) && e.data?.type === DEMOWAY_DEMO_DIALOG_LOAD),
     );
   }
 
