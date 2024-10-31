@@ -20,6 +20,46 @@ npm install demoway-sdk --save
 yarn add demoway-sdk
 ```
 
+## Setup
+
+### Tailwind user
+
+```js
+// tailwind.config.js
+
+module.exports = {
+  content: [
+    '**/demoway-sdk/dist/**/*.{js,cjs}',
+    // ...
+  ],
+};
+```
+
+### Uno CSS user
+
+```js
+// uno.config.js
+
+export default defineConfig({
+  content: {
+    pipeline: {
+      include: [
+        '**/demoway-sdk/dist/**/*.{js,cjs}',
+        // ...
+      ],
+    },
+  },
+});
+```
+
+### If you are not using tailwind or unocss or something similar
+
+```js
+import 'demoway-sdk/style.css';
+// or
+require('demoway-sdk/style.css');
+```
+
 ## Initialize DemoWay SDK
 
 Initialize DemoWay SDK before application rendering
@@ -31,16 +71,16 @@ import { initialize, IUserInfo } from 'demoway-sdk';
 import { createApp } from 'vue';
 
 initialize({
-  accessToken: '', 
+  accessToken: '',
   appId: '',
   userInfo: {
     openId: '',
     userName: '',
     nickName: ''
     xxx: '',
-    company: { 
-      id: ''  
-      name: '' 
+    company: {
+      id: ''
+      name: ''
     }
   } as IUserInfo, // IUserInfo is TS interface, you can remove it if you are not using TS
 })
@@ -57,16 +97,16 @@ import { initialize, IUserInfo } from 'demoway-sdk';
 import { createRoot } from 'react-dom/client';
 
 initialize({
-  accessToken: '', 
+  accessToken: '',
   appId: '',
   userInfo: {
     openId: '',
     userName: '',
     nickName: ''
     xxx: '',
-    company: { 
-      id: ''  
-      name: '' 
+    company: {
+      id: ''
+      name: ''
     }
   } as IUserInfo, // IUserInfo is TS interface, you can remove it if you are not using TS
 })
@@ -79,19 +119,19 @@ const root = createRoot(domNode);
 root.render(<App />);
 ```
 
-| Name          | Required |    Description         |
-| --------      | ------- |    ---------|
-| accessToken   | required    |   temporary access token fot test, you can get it from your DemoWay dashboard |
-| appId      | required     | your DemoWay application id, you can get it from your DemoWay dashboard  |
-| userInfo         | optional   | **strongly recommend**  |
-| userInfo.openId   | optional   |  open user id of the user in your system, you can associate each user with the users in your own system when retrieving user access records through the API. **strongly recommend**  |
-| userInfo.nickName   | optional   |  the nick name of the user in your system |
-| userInfo.xxx   | optional   |   you can add string value with any key name to "userInfo" |
-| userInfo.company   | optional   |   **strongly recommend** |
-| userInfo.company.id   | optional   |   the company id of the user in your system |
-| userInfo.company.name   | required   |   the company or organization name of the user, required in `userInfo.company`|
+| Name                  | Required | Description                                                                                                                                                                        |
+| --------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| accessToken           | required | temporary access token fot test, you can get it from your DemoWay dashboard                                                                                                        |
+| appId                 | required | your DemoWay application id, you can get it from your DemoWay dashboard                                                                                                            |
+| userInfo              | optional | **strongly recommend**                                                                                                                                                             |
+| userInfo.openId       | optional | open user id of the user in your system, you can associate each user with the users in your own system when retrieving user access records through the API. **strongly recommend** |
+| userInfo.nickName     | optional | the nick name of the user in your system                                                                                                                                           |
+| userInfo.xxx          | optional | you can add string value with any key name to "userInfo"                                                                                                                           |
+| userInfo.company      | optional | **strongly recommend**                                                                                                                                                             |
+| userInfo.company.id   | optional | the company id of the user in your system                                                                                                                                          |
+| userInfo.company.name | required | the company or organization name of the user, required in `userInfo.company`                                                                                                       |
 
-When a user accesses the demo, Demoway will create an anonymous user for them. If you provide the "userInfo" field when initializing the SDK, this information will be associated with the anonymous user. In the Demoway dashboard, when viewing the user's access records, you may also see this information. This makes it convenient to identify different users. If the "userInfo" includes the "openId" field, you can associate each user with the users in your own system when retrieving access records through the API. 
+When a user accesses the demo, Demoway will create an anonymous user for them. If you provide the "userInfo" field when initializing the SDK, this information will be associated with the anonymous user. In the Demoway dashboard, when viewing the user's access records, you may also see this information. This makes it convenient to identify different users. If the "userInfo" includes the "openId" field, you can associate each user with the users in your own system when retrieving access records through the API.
 
 ## Usage
 
@@ -114,7 +154,7 @@ Open a checklist in dialog, which can switch to full screen mode.
 ```js
 import { openDemoDialog } from 'demoway-sdk';
 
-openDemoDialog('demo-id', {checklistId: 'checklist-id'}); // demo-id and checklist-id can be got from DemoWay dashboard
+openDemoDialog('demo-id', { checklistId: 'checklist-id' }); // demo-id and checklist-id can be got from DemoWay dashboard
 ```
 
 ### Record a New Demo

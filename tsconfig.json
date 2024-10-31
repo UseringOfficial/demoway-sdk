@@ -8,7 +8,7 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "importsNotUsedAsValues": "error"
+    "verbatimModuleSyntax": true
   },
   "include": [],
   "references": [

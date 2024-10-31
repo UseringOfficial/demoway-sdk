@@ -1,6 +1,16 @@
-export interface IDemoDialogOptions {
-  zIndex?: number;
+export interface IDemoParamsBase {
   checklistId?: string;
+}
+
+export interface IDemoDialogOptions extends IDemoParamsBase {
+  class?: string;
+  backdropClass?: string;
+}
+
+export interface IDemoUrlParams extends IDemoParamsBase {
+  browser?: boolean;
+  scaleDown?: boolean;
+  scale?: number;
 }
 
 export interface DemoDialogElement extends HTMLElement, IDemoDialogOptions {

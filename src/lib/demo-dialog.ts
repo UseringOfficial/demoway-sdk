@@ -1,19 +1,28 @@
 import autoBind from 'auto-bind';
-import type { DemoDialogElement, IDemoDialog, IDemoDialogOptions, ISDKInitializeOptions } from './types';
-import '../components/demo-dialog.svelte';
+import { mount, unmount } from 'svelte';
+import DemoDialog from '../components/demo-dialog.svelte';
+import type { IDemoDialog, IDemoDialogOptions } from './types';
+('../components/demo-dialog.svelte');
 
 export class DemoDialogController implements IDemoDialog {
-  private readonly element: DemoDialogElement;
+  private readonly element: ReturnType<typeof mount>;
 
-  constructor(element: DemoDialogElement) {
-    this.element = element;
+  constructor(href: string, origin: string, options?: IDemoDialogOptions) {
     autoBind(this);
+
+    this.element = mount(DemoDialog, {
+      target: document.body,
+      props: {
+        href,
+        origin,
+        class: options?.class,
+        backdropClass: options?.backdropClass,
+        close: this.close,
+      },
+    });
   }
 
   public close() {
-    if (!document.body.contains(this.element)) {
-      return;
-    }
-    document.body.removeChild(this.element);
+    unmount(this.element);
   }
 }

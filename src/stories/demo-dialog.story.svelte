@@ -9,24 +9,24 @@
   /**
    * @type {'cn' | 'global'}
    */
-  let region = 'global'
+  let region = 'global';
   let demoId = '';
 
   function onClick() {
     initialize({
       accessToken,
       appId,
-      region
+      region,
     });
-    openDemoDialog(demoId)
+    openDemoDialog(demoId);
   }
 </script>
 
 <svelte:component this="{Hst.Story}" title="DemoDialog">
-  <input bind:value={demoId} />
-  <select name="region" bind:value={region}>
+  <input bind:value="{demoId}" />
+  <select name="region" bind:value="{region}">
     <option value="global">Global</option>
     <option value="cn">CN</option>
   </select>
-  <button on:click={onClick}>Open</button>
+  <button on:click="{onClick}">Open</button>
 </svelte:component>

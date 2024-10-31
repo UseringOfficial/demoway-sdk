@@ -7,6 +7,8 @@ import type { ISDKInitializeOptions } from './lib/types';
 export * from './lib/types';
 export type { ISDKService };
 
+import 'virtual:uno.css';
+
 function errorNotInitialized(): never {
   throw new Error('sdk is not initialized');
 }
@@ -14,12 +16,14 @@ function errorNotInitialized(): never {
 const dummySDKService: ISDKService = {
   openDemoDialog: errorNotInitialized,
   enableRecord: errorNotInitialized,
+  getDemoUrl: errorNotInitialized,
 };
 
 const serviceHost = new ServiceHost(dummySDKService);
 
-export const openDemoDialog = serviceHost.openDemoDialog;
-export const enableRecord = serviceHost.enableRecord;
+const { openDemoDialog, enableRecord, getDemoUrl } = serviceHost;
+
+export { openDemoDialog, enableRecord, getDemoUrl };
 
 export function initialize(options: ISDKInitializeOptions): void {
   if (!options.accessToken) {

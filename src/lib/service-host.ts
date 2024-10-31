@@ -1,8 +1,9 @@
 import bind from 'auto-bind';
-import type { IDemoDialog, IDemoDialogOptions, IRecorderService } from './types';
+import type { IDemoDialog, IDemoDialogOptions, IDemoUrlParams, IRecorderService } from './types';
 
 export interface ISDKService extends IRecorderService {
   openDemoDialog(demoId: string, options?: IDemoDialogOptions): Promise<IDemoDialog>;
+  getDemoUrl(demoId: string, params?: IDemoUrlParams): string;
 }
 
 export class ServiceHost implements ISDKService {
@@ -19,6 +20,10 @@ export class ServiceHost implements ISDKService {
 
   public enableRecord(): Promise<void> {
     return this.delegate.enableRecord();
+  }
+
+  public getDemoUrl(demoId: string, params?: IDemoUrlParams): string {
+    return this.delegate.getDemoUrl(demoId, params);
   }
 
   public openDemoDialog(demoId: string, options?: IDemoDialogOptions): Promise<IDemoDialog> {
