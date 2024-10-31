@@ -25,7 +25,7 @@ const { openDemoDialog, enableRecord, getDemoUrl } = serviceHost;
 
 export { openDemoDialog, enableRecord, getDemoUrl };
 
-export function initialize(options: ISDKInitializeOptions): void {
+export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
   if (!options.accessToken) {
     throw new Error('Invalid token');
   }
@@ -35,6 +35,8 @@ export function initialize(options: ISDKInitializeOptions): void {
   }
 
   serviceHost.initialize(new ServiceImpl(options));
+
+  return Promise.resolve(serviceHost);
 }
 
 export function rageClick(element: HTMLElement, count: number, timeLimit: number): Promise<void> {
