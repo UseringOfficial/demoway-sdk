@@ -58,18 +58,29 @@ export class ServiceImpl implements ISDKService {
   }
 
   public enableRecord(): Promise<void> {
-    if (!this.recorderServiceDelegate) {
-      this.recorderServiceDelegate = this.loadRecorder();
-    }
-    return this.recorderServiceDelegate.then((service) => service.enableRecord());
+    return this.loadRecorder().then((service) => service.enableRecord());
   }
 
   private loadRecorder(): Promise<IRecorderService> {
-    const endpoint = this.options.endpoint || 'https://s.dwimg.top/sdk/v1/index.js';
-    return import(/* @vite-ignore */ endpoint).then((module) => {
-      const { userInfo, ...otherOptions } = this.options;
+    if (!this.recorderServiceDelegate) {
+      const endpoint = this.options.endpoint || 'https://s.dwimg.top/sdk/v1/index.js';
+      this.recorderServiceDelegate = import(/* @vite-ignore */ endpoint)
+        .then((module) => {
+          const { userInfo, ...otherOptions } = this.options;
 
-      return module.initialize({ ...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes });
-    });
+          return module.initialize({ ...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes });
+        })
+        .then(
+          (service) => {
+            this.recorderServiceDelegate = service;
+            return service;
+          },
+          (error) => {
+            console.error(error);
+            this.recorderServiceDelegate = null;
+          },
+        );
+    }
+    return this.recorderServiceDelegate;
   }
 }
