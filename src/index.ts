@@ -1,59 +1,29 @@
 import { bufferCount, filter, firstValueFrom, fromEvent, map, noop } from 'rxjs';
 import type { ISDKService } from './lib/service-host';
 import { ServiceHost } from './lib/service-host';
+import { ServiceImpl } from './lib/service-impl';
+import type { ISDKInitializeOptions } from './lib/types';
 
-export * from './lib/demo-dialog';
+export * from './lib/types';
 export type { ISDKService };
 
-const SESSION_STORAGE_KEY = 'DEMOWAY_SDK_INITIALIZED';
-const INITIALIZE_EVENT_KEY = 'demoway-sdk-initialize';
-
-export interface ISDKAttributes {
-  userInfo?: IUserInfo;
-
-  [key: string]: unknown;
-}
-
-export interface IUserInfo {
-  openId?: string;
-  userName?: string;
-  nickName?: string;
-  email?: string;
-  company?: {
-    id?: string;
-    name: string;
-  };
-
-  [key: string]: unknown;
-}
-
-export interface ISDKInitializeOptions {
-  appId: string;
-  accessToken: string;
-  zIndex?: number;
-  userInfo?: IUserInfo;
-  endpoint?: string;
-  region?: string;
-  locale?: string;
-}
+import 'virtual:uno.css';
 
 function errorNotInitialized(): never {
   throw new Error('sdk is not initialized');
 }
 
-const dummySDKService: Promise<ISDKService> = Promise.resolve({
+const dummySDKService: ISDKService = {
   openDemoDialog: errorNotInitialized,
   enableRecord: errorNotInitialized,
-});
+  getDemoUrl: errorNotInitialized,
+};
 
 const serviceHost = new ServiceHost(dummySDKService);
 
-export const openDemoDialog = serviceHost.openDemoDialog;
-export const enableRecord = serviceHost.enableRecord;
+const { openDemoDialog, enableRecord, getDemoUrl } = serviceHost;
 
-if (typeof sessionStorage === 'object') {
-  sessionStorage.setItem(SESSION_STORAGE_KEY, 'false');
-}
+export { openDemoDialog, enableRecord, getDemoUrl };
 
 export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
   if (!options.accessToken) {
@@ -64,28 +34,9 @@ export function initialize(options: ISDKInitializeOptions): Promise<ISDKService>
     throw new Error('Missing appId');
   }
 
-  if (serviceHost.delegate !== dummySDKService) {
-    return serviceHost.delegate.then(() => serviceHost);
-  }
+  serviceHost.initialize(new ServiceImpl(options));
 
-  if (sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true') {
-    throw new Error('Multiple sdk detected');
-  }
-
-  const promise = import(options.endpoint ?? 'https://s.demoway.co/sdk/sdk-service/index.js')
-    .then((module) => {
-      sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
-      const { userInfo, ...otherOptions } = options;
-
-      return module.initialize({ ...otherOptions, attributes: { userInfo: userInfo } as ISDKAttributes });
-    })
-    .then((service) => {
-      window.dispatchEvent(new CustomEvent(INITIALIZE_EVENT_KEY));
-      return service;
-    });
-  serviceHost.delegate = promise;
-
-  return promise.then(() => serviceHost);
+  return Promise.resolve(serviceHost);
 }
 
 export function rageClick(element: HTMLElement, count: number, timeLimit: number): Promise<void> {
@@ -94,7 +45,7 @@ export function rageClick(element: HTMLElement, count: number, timeLimit: number
       map(() => Date.now()),
       bufferCount(count),
       filter((list) => list[list.length - 1] - list[0] < timeLimit),
-      map(noop)
-    )
+      map(noop),
+    ),
   );
 }
