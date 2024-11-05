@@ -8,9 +8,6 @@ import UnoCSS from 'unocss/vite';
 export default defineConfig({
   plugins: [
     svelte({
-      compilerOptions: {
-        customElement: true,
-      },
       preprocess: vitePreprocess(),
     }),
     dts({
