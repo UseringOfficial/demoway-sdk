@@ -57,7 +57,7 @@
   onclick="{onClick}"
   onkeydown="{onKeyDown}"
 >
-  <div class="{clsx('w-11/12 h-11/12 overflow-hidden', className)}" use:resize="{onResize}">
+  <div class="{clsx('w-11/12 h-11/12 overflow-hidden rounded-xl', className)}" use:resize="{onResize}">
     <iframe class="border-none" {width} {height} title="demo" src="{href}" allowfullscreen allowtransparency="{true}"
     ></iframe>
   </div>
