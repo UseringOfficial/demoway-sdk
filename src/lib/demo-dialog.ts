@@ -1,8 +1,8 @@
 import autoBind from 'auto-bind';
 import { mount, unmount } from 'svelte';
+
 import DemoDialog from '../components/demo-dialog.svelte';
 import type { IDemoDialog, IDemoDialogOptions } from './types';
-('../components/demo-dialog.svelte');
 
 export class DemoDialogController implements IDemoDialog {
   private readonly element: ReturnType<typeof mount>;

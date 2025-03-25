@@ -1,7 +1,6 @@
 <script lang="ts">
-  import clsx from 'clsx';
-  import { on } from 'svelte/events';
   import { DEMOWAY_DEMO_DIALOG_CLOSE } from '../lib/constants';
+  import { cn } from '../lib/utils';
   import { resize } from './resize.action';
 
   interface Props {
@@ -40,24 +39,23 @@
     }
   }
 
-  on(window, 'message', (e) => {
+  function onMessage(e: MessageEvent): void {
     if (e.origin === origin && e.data?.type === DEMOWAY_DEMO_DIALOG_CLOSE) {
       onClose();
     }
-  });
+  }
 </script>
 
+<svelte:window onmessage="{onMessage}" />
+
 <div
-  class="{clsx(
-    'fixed w-screen h-screen flex items-center justify-center top-0 left-0 bg-background/80',
-    backdropClass,
-  )}"
+  class="{cn('fixed w-screen h-screen flex items-center justify-center top-0 left-0 bg-background/80', backdropClass)}"
   role="button"
   tabindex="-1"
   onclick="{onClick}"
   onkeydown="{onKeyDown}"
 >
-  <div class="{clsx('w-11/12 h-11/12 overflow-hidden rounded-xl', className)}" use:resize="{onResize}">
+  <div class="{cn('w-11/12 h-11/12 overflow-hidden rounded-xl', className)}" use:resize="{onResize}">
     <iframe class="border-none" {width} {height} title="demo" src="{href}" allowfullscreen allowtransparency="{true}"
     ></iframe>
   </div>

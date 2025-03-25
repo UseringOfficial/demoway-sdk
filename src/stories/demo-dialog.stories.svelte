@@ -1,13 +1,14 @@
 <script module>
   import { defineMeta } from '@storybook/addon-svelte-csf';
+
   import Page from './demo-dialog-button.svelte';
 
   const appId = import.meta.env.VITE_APP_ID;
   const accessToken = import.meta.env.VITE_ACCESS_TOKEN;
-console.log({
-  appId,
-  accessToken
-})
+  console.log({
+    appId,
+    accessToken,
+  });
   const { Story } = defineMeta({
     title: 'Demo Dialog',
     component: Page,

@@ -1,4 +1,5 @@
 import { filter, firstValueFrom, fromEvent, type Observable } from 'rxjs';
+
 import { DEMOWAY_DEMO_DIALOG_LOAD } from './constants';
 import { DemoDialogController } from './demo-dialog';
 import type { ISDKService } from './service-host';
@@ -36,7 +37,11 @@ export class ServiceImpl implements ISDKService {
     url.searchParams.set('scaleDown', String(false));
     url.searchParams.set('scale', String(100));
     url.searchParams.set('client', 'sdk');
-    url.searchParams.set('token', this.options.accessToken);
+
+    if (this.options.accessToken) {
+      url.searchParams.set('token', this.options.accessToken);
+    }
+
     if (params?.checklistId) {
       url.searchParams.set('checklistId', params.checklistId);
     }
