@@ -27,10 +27,6 @@ const { openDemoDialog, enableRecord, getDemoUrl } = serviceHost;
 export { enableRecord, getDemoUrl, openDemoDialog };
 
 export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
-  if (!options.accessToken) {
-    throw new Error('Invalid token');
-  }
-
   if (!options.appId) {
     throw new Error('Missing appId');
   }
