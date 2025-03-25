@@ -1,8 +1,9 @@
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path, { join } from 'path';
+import nodeExternals from 'rollup-plugin-node-externals';
+import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import UnoCSS from 'unocss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,8 @@ export default defineConfig({
       tsconfigPath: join(__dirname, 'tsconfig.json'),
     }),
     UnoCSS(),
+
+    nodeExternals(),
 
     {
       name: 'webpack-ignore',
