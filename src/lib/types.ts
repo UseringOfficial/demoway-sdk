@@ -45,7 +45,7 @@ export interface IUserInfo {
 
 export interface ISDKInitializeOptions {
   appId: string;
-  accessToken: string;
+  accessToken?: string;
   zIndex?: number;
   userInfo?: IUserInfo;
   endpoint?: string;

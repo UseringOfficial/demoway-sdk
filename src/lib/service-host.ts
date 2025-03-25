@@ -1,4 +1,5 @@
 import bind from 'auto-bind';
+
 import type { IDemoDialog, IDemoDialogOptions, IDemoUrlParams, IRecorderService } from './types';
 
 export interface ISDKService extends IRecorderService {

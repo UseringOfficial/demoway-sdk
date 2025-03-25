@@ -1,3 +1,6 @@
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 import type { ISDKInitializeOptions } from './types';
 
 export function normalizeOrigin(options: ISDKInitializeOptions) {
@@ -11,4 +14,8 @@ export function normalizeOrigin(options: ISDKInitializeOptions) {
     default:
       return 'https://app.demoway.com';
   }
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }

@@ -30,4 +30,4 @@
   <option value="global">Global</option>
   <option value="cn">CN</option>
 </select>
-<button on:click="{onClick}">Open</button>
+<button onclick="{onClick}">Open</button>

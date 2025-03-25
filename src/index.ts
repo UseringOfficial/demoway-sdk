@@ -1,4 +1,5 @@
 import { bufferCount, filter, firstValueFrom, fromEvent, map, noop } from 'rxjs';
+
 import type { ISDKService } from './lib/service-host';
 import { ServiceHost } from './lib/service-host';
 import { ServiceImpl } from './lib/service-impl';
@@ -23,7 +24,7 @@ const serviceHost = new ServiceHost(dummySDKService);
 
 const { openDemoDialog, enableRecord, getDemoUrl } = serviceHost;
 
-export { openDemoDialog, enableRecord, getDemoUrl };
+export { enableRecord, getDemoUrl, openDemoDialog };
 
 export function initialize(options: ISDKInitializeOptions): Promise<ISDKService> {
   if (!options.accessToken) {
